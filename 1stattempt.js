@@ -1,6 +1,6 @@
-let attempts = 0;
-
 function checkAnswer() {
+
+    // !Get Input Values
     let num1 = parseInt(document.querySelector('#num1').value);
     let num2 = parseInt(document.querySelector('#num2').value);
     let userAnswer = parseInt(document.querySelector('#answer').value);
@@ -8,7 +8,7 @@ function checkAnswer() {
     let output = document.querySelector('#output');
     let correctAnswer;
 
-    //! Determine Correct Answer
+    //! Select Operator
     if (operator === '+') {
         correctAnswer = num1 + num2;
     } else if (operator === '-') {
@@ -17,28 +17,57 @@ function checkAnswer() {
     else if (operator === 'x') {
         correctAnswer = num1 * num2;
     }
-    else if (operator === '/') {
-        if (num2 === 0) {
-            output.textContent = `Bruh. You can't divide by zero.`;
-            return;
-        }
+    else {
         correctAnswer = num1 / num2;
     }
 
-    //! Check User's Answer
+    // !Check and display Answer
     if (userAnswer === correctAnswer) {
         output.textContent = `Correct. Great job!`;
-        attempts = 0; // Resets attempts if correct
+    } else if (operator == '/' && num2 == 0) {
+        output.textContent = `Bruh. You can't divide by zero.`
     } else {
-        attempts++;
-        if (attempts < 3) {
-            output.textContent = `Incorrect. Try again! (Attempt ${attempts} of 3)`;
-        } else {
-            output.textContent = `Incorrect. The correct answer is ${correctAnswer}.`;
-            attempts = 0; // Resets attempts after showing the answer
-        }
+        count(correctAnswer);
     }
 
 }
 
-document.querySelector('button').addEventListener('click', checkAnswer);
+
+
+let btn = document.querySelector('button');
+
+
+btn.addEventListener('click', checkAnswer);
+btn.addEventListener('click', count);
+
+
+// document.querySelector('button').addEventListener('click', count);
+
+
+
+
+
+
+
+
+let i = 0;
+
+
+function count(ans) {
+    let output = document.querySelector('#output');
+
+
+    if (i < 2) {
+        output.textContent = `Incorrect. Try again!`;
+        i++;
+    } else {
+        output.textContent = `The anser is ${ans}.`
+    }
+
+}
+
+
+
+
+// while (i < 3) {
+
